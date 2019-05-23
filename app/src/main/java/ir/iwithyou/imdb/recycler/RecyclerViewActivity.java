@@ -1,10 +1,13 @@
 package ir.iwithyou.imdb.recycler;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,21 +34,17 @@ public class RecyclerViewActivity extends AppCompatActivity {
     private SearchAdapter mySearchAdapter;
     private LinearLayoutManager linearLayoutManager;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view);
 
-        btn = findViewById(R.id.btn_Net);
-        editText = findViewById(R.id.et_Title);
 
+        String MovieName = getIntent().getStringExtra("MovieName");
 
-
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MovieName = editText.getText().toString();
 
                 RetrofitAPIInterface client = RetrofitServiceGenerator.createService(RetrofitAPIInterface.class);
                 Call<SearchName> searchNameCall = client.searchNameCall(MovieName, "77d67210");
@@ -55,6 +54,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
                         List<Search> searchList = response.body().getSearch();
                         setupRecyclerView(searchList);
 
+
                     }
 
                     @Override
@@ -63,17 +63,17 @@ public class RecyclerViewActivity extends AppCompatActivity {
                     }
                 });
 
+
+
+
             }
-        });
 
-
-    }
 
 
     private void setupRecyclerView(List<Search> searchList) {
         myRecycler = findViewById(R.id.rv_film);
-        mySearchAdapter = new SearchAdapter(searchList,this);
-        linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        mySearchAdapter = new SearchAdapter(searchList, this);
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         myRecycler.setAdapter(mySearchAdapter);
         myRecycler.setLayoutManager(linearLayoutManager);
         myRecycler.setItemAnimator(new DefaultItemAnimator());

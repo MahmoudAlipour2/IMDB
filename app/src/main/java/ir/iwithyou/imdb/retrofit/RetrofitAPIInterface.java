@@ -11,7 +11,4 @@ public interface RetrofitAPIInterface {
     @GET("/")
     Call<SearchName> searchNameCall(@Query("s") String movieName, @Query("apikey") String apiKey);
 
-/*
-    @GET("/")
-    Call<Resultsearchbyid> MOVIE_CALL(@Query("i") String movieName, @Query("apikey") String apiKey);*/
 }
