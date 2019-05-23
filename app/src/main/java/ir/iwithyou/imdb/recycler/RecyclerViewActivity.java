@@ -2,12 +2,16 @@ package ir.iwithyou.imdb.recycler;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
 import ir.iwithyou.imdb.R;
+import ir.iwithyou.imdb.pojo.searchName.Search;
 import ir.iwithyou.imdb.pojo.searchName.SearchName;
 import ir.iwithyou.imdb.retrofit.RetrofitAPIInterface;
 import ir.iwithyou.imdb.retrofit.RetrofitServiceGenerator;
@@ -20,6 +24,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     Button btn;
     String MovieName;
     EditText editText;
+    RecyclerView myRecycler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,15 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
         btn = findViewById(R.id.btn_Net);
         editText = findViewById(R.id.et_Title);
+
+        myRecycler =findViewById(R.id.rv_film);
+
+
+
+
+
+
+
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +53,9 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 searchNameCall.enqueue(new Callback<SearchName>() {
                     @Override
                     public void onResponse(Call<SearchName> call, Response<SearchName> response) {
-                        Toast.makeText(RecyclerViewActivity.this, "OK", Toast.LENGTH_SHORT).show();
+
+
+                        Toast.makeText(RecyclerViewActivity.this, "ok", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
