@@ -2,6 +2,8 @@ package ir.iwithyou.imdb.recycler;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,9 @@ public class RecyclerViewActivity extends AppCompatActivity {
     EditText editText;
     RecyclerView myRecycler;
 
+    private SearchAdapter mySearchAdapter;
+    private LinearLayoutManager linearLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +38,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
         btn = findViewById(R.id.btn_Net);
         editText = findViewById(R.id.et_Title);
-
-        myRecycler =findViewById(R.id.rv_film);
-
-
-
-
 
 
 
@@ -53,9 +52,9 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 searchNameCall.enqueue(new Callback<SearchName>() {
                     @Override
                     public void onResponse(Call<SearchName> call, Response<SearchName> response) {
+                        List<Search> searchList = response.body().getSearch();
+                        setupRecyclerView(searchList);
 
-
-                        Toast.makeText(RecyclerViewActivity.this, "ok", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -68,5 +67,15 @@ public class RecyclerViewActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+    private void setupRecyclerView(List<Search> searchList) {
+        myRecycler = findViewById(R.id.rv_film);
+        mySearchAdapter = new SearchAdapter(searchList,this);
+        linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        myRecycler.setAdapter(mySearchAdapter);
+        myRecycler.setLayoutManager(linearLayoutManager);
+        myRecycler.setItemAnimator(new DefaultItemAnimator());
     }
 }

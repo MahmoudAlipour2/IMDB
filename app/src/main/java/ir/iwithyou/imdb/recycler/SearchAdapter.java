@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import ir.iwithyou.imdb.R;
@@ -37,7 +39,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 
         Search aSearch = searchList.get(i);
-        myViewHolder.aPoster.setImageResource(aSearch.getPoster());
+        Picasso.get().load(aSearch.getPoster()).into(myViewHolder.aPoster);
         myViewHolder.aYear.setText(aSearch.getYear());
         myViewHolder.aIMDB.setText(aSearch.getImdbID());
 

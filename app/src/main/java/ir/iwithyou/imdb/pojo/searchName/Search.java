@@ -54,7 +54,7 @@ public class Search {
         this.type = type;
     }
 
-    public int getPoster() {
+    public String getPoster() {
         return poster;
     }
 
