@@ -40,8 +40,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
         Search aSearch = searchList.get(i);
         Picasso.get().load(aSearch.getPoster()).into(myViewHolder.aPoster);
+        myViewHolder.aTitle.setText(aSearch.getTitle());
         myViewHolder.aYear.setText(aSearch.getYear());
-        myViewHolder.aIMDB.setText(aSearch.getImdbID());
+       // myViewHolder.aIMDB.setText(aSearch.getImdbID());
 
     }
 
@@ -54,14 +55,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         public ImageView aPoster;
         public TextView aTitle;
         public TextView aYear;
-        public TextView aIMDB;
+       // public TextView aIMDB;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             aPoster = itemView.findViewById(R.id.i_Poster);
             aTitle = itemView.findViewById(R.id.i_tv_Title);
-            aIMDB = itemView.findViewById(R.id.i_tv_IMDB);
+            //aIMDB = itemView.findViewById(R.id.i_tv_IMDB);
             aYear = itemView.findViewById(R.id.i_tv_Year);
 
         }
