@@ -11,7 +11,7 @@
 
 
     <ImageView
-        android:src="@drawable/mainactivity"
+        android:src="@drawable/maina"
         android:id="@+id/img_imdb"
        android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"

@@ -28,7 +28,7 @@
                android:layout_gravity="center_horizontal"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:scaleType="fitXY"
-                android:src="@drawable/flower" />
+                 />
 
             <TextView
                 android:id="@+id/i_tv_Title"
