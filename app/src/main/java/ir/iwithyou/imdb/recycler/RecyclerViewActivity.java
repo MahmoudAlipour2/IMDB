@@ -35,8 +35,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,28 +44,29 @@ public class RecyclerViewActivity extends AppCompatActivity {
         String MovieName = getIntent().getStringExtra("MovieName");
 
 
-                RetrofitAPIInterface client = RetrofitServiceGenerator.createService(RetrofitAPIInterface.class);
-                Call<SearchName> searchNameCall = client.searchNameCall(MovieName, "77d67210");
-                searchNameCall.enqueue(new Callback<SearchName>() {
-                    @Override
-                    public void onResponse(Call<SearchName> call, Response<SearchName> response) {
-                        List<Search> searchList = response.body().getSearch();
-                        setupRecyclerView(searchList);
+        RetrofitAPIInterface client = RetrofitServiceGenerator.createService(RetrofitAPIInterface.class);
+        Call<SearchName> searchNameCall = client.searchNameCall(MovieName, "77d67210");
+        searchNameCall.enqueue(new Callback<SearchName>() {
+            @Override
+            public void onResponse(Call<SearchName> call, Response<SearchName> response) {
 
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<SearchName> call, Throwable t) {
-                        Toast.makeText(RecyclerViewActivity.this, "Fail", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-
+                List<Search> searchList = response.body().getSearch();
+                if (searchList != null) {
+                    setupRecyclerView(searchList);
+                } else {
+                    Toast.makeText(RecyclerViewActivity.this, "We dont find any reslut for your request.", Toast.LENGTH_LONG).show();
+                }
 
             }
 
+            @Override
+            public void onFailure(Call<SearchName> call, Throwable t) {
+                Toast.makeText(RecyclerViewActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
 
 
     private void setupRecyclerView(List<Search> searchList) {

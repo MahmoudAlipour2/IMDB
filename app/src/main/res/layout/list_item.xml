@@ -51,6 +51,14 @@
                 android:layout_marginRight="20dp"
                 android:text="Year"
                 android:textSize="15dp" />
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/i_tv_IMDB"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_below="@+id/i_tv_Title"
+                android:text="Year"
+                android:textSize="15dp" />
 
         </LinearLayout>
 
